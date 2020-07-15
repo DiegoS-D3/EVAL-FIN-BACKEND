@@ -1,15 +1,23 @@
 console.log('NODE.js')
 
-var http = require('http')
-var express = require('express')
-var Routing = require('./requestRouting')
+var bodyParser= require('body-parser'),
+    http = require('http'),
+    express = require('express'),
 
-var port = 8082
-var app = express()
+    router = require('./router')
+
+var port = port = process.env.PORT || 3000,
+    app = express(),
+    Server = http.createServer(app)
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
+
+app.use('/router', router)
+app.use(express.static('public'))
+
 
 //CREACION DEL SERVER
-var Server = http.createServer(app)
-
 //LANZAMOS EL SERVIDOR 
 //ASIGNAMOS UN CALLBACK UNA VEZ QUE SE LANCE EL SERVIDOR
 Server.listen(port,function(){
