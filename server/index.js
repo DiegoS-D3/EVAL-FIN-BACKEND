@@ -14,7 +14,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.use('/router', router)
-app.use(express.static('public'))
+app.use(express.static('../public'))
 
 
 //CREACION DEL SERVER
