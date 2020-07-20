@@ -1,6 +1,3 @@
-$(document).ready(function(){
-  $('.col m8').hide();
-})
 
 //Inicializador del elemento Slider
 $("#rangoPrecio").ionRangeSlider({
@@ -13,31 +10,6 @@ $("#rangoPrecio").ionRangeSlider({
   prefix: "$"
 })
 
-function verCardHor(){
-  $('.card horizontal').toggleClass('invisible');
-}
-
-function insertarDatos(data){
-  $.each(data,function(indice,elemento){
-    let insertar = "<div class='comentario'><div class='direccion'>Direccion: "+elemento.direccion+"</div> <div class='telefono'>"+elemento.telefono+"</div>";
-    $(".card-content").append(insertar);
-  });
-}
-
-function  cargarMasComentarios(){
-  fetch("./data.json",{
-  method : 'GET',
-  })
-  .then(function(data){
-    return data.json()
-  })
-  .then(function(json){
-    let insertar = "<div class='direccion'>Direccion: " + json.direccion+ "</div>"
-    $('card-content').append(insertar);
-  })
-   
-}
-
 function setSearch() {
   let busqueda = $('#checkPersonalizada')
   busqueda.on('change', (e) => {
@@ -48,12 +20,26 @@ function setSearch() {
     }
     $('#personalizada').toggleClass('invisible')
   })
-  let busqVerTodos = $('#buscar')
-  busqVerTodos.on('click', (e) =>{
-    
-    cargarMasComentarios();
-    alert('click');
+}
+
+function verTodos() {
+  let busqueda = $('#buscar')
+  busqueda.on('click',(e)=>{
+    alert('click')
+    $.ajax({
+      url:'http://localhost:3000/router/search',
+      type: 'get',
+      dataType: 'json'
+    })
+    .done((data)=>{
+      alert('done');
+      if(!data.error){
+        console.log(data);
+        alert('data');
+      }
+    })
   })
 }
 
 setSearch()
+verTodos()
