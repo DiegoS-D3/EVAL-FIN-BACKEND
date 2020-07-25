@@ -9,6 +9,12 @@ $("#rangoPrecio").ionRangeSlider({
   prefix: "$"
 })
 
+function visualizar(){
+  let panel = $(".clasificado")
+  panel.show()
+  panel.style.display("block")
+}
+
 function setSearch() {
   let busqueda = $('#checkPersonalizada')
   busqueda.on('change', (e) => {
@@ -25,6 +31,7 @@ setSearch();
 
 ((document, window, undefined, $)=>{
   (()=>{
+    
     return Buscador = {
       io: io()
       ,$clasificadoTemp: $('.clasificado').clone()
@@ -36,6 +43,7 @@ setSearch();
         self.loadInmuebles()
         $('.clasificado').empty("");
         $("#buscar").click(()=>{
+          visualizar();
           var ciudad = $("#ciudad").val();
           var tipo = $("#tipo").val();
           var precio = $("#rangoPrecio").val();
