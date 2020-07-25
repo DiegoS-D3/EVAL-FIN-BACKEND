@@ -4,7 +4,7 @@ const fsd = require('fs'),
 
 //OBJETO DE RETORNA LA DATA OBTENIDA DEL ARCHIVO data.json
 module.exports = {
-    getDataAll: (dataType) => {
+    getData: (dataType) => {
         var self = this;
         //let dataPath = __dirname + pathd.join('/data/data.json');
         let dataPath = pathd.join(__dirname, '/data/data.json');
