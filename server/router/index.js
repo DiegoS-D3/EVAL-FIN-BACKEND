@@ -13,7 +13,7 @@ var  bodyParser = require('body-parser')
 
 
 Router.get('/search', (req,res)=>{
-    Storage.getDataAll('data')
+    Storage.getData('data')
             .then((data)=>{
                 res.json(data)
             }).catch((error)=>{
