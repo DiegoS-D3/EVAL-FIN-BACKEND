@@ -1,8 +1,4 @@
-/*var express = require('express')
-const Storage = require('../storage')
-var Router = express.Router()
-,io = require('socket.io')
-*/
+
 var  bodyParser = require('body-parser')
     ,http = require('http')
     ,express = require('express')
