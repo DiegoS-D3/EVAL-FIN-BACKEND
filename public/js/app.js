@@ -16,10 +16,10 @@ function setSearch() {
   busqueda.on('change', (e) => {
     if (this.customSearch == false) {
       this.customSearch = true
-      alert("FILTRO DESACTIVADO")
+      $('.clasificado').hide()
       ban=0;
     } else {
-      alert("FILTRO ACTIVADO")
+      $('.clasificado').hide()
       ban=1;
       this.customSearch = false
     }
@@ -43,14 +43,9 @@ setSearch();
         self.loadTipos()
         $('.clasificado').empty("");
         $("#buscar").click(()=>{
-          //self.loadCiudades()
-          //self.loadTipos()
-          if(ban == 1){
+          if(ban == 0){
             self.loadInmuebles()
           }else{
-          self.loadInmuebles()
-          alert(ban);
-          $('.clasificado').show(); 
           var ciudad = $("#ciudad").val();
           var tipo = $("#tipo").val();
           var precio = $("#rangoPrecio").val();
@@ -107,7 +102,6 @@ setSearch();
             .done(data=>{
               var $inmuebles = $(".lista");
                $.each(data, (i,inmueble)=>{
-                 //alert('inmuebles');
                  var htmlNew = self.$clasificadoTemp.html().replace(":Direccion:",inmueble.Direccion)
                                                         .replace(":Ciudad:",inmueble.Ciudad)
                                                         .replace(":Telefono:",inmueble.Telefono)
@@ -129,7 +123,7 @@ setSearch();
               var $inmuebles = $(".lista");
               $inmuebles.html("");
                $.each(data, (i,inmueble)=>{
-                 var htmlNew = self.$clasificadoTemp.html().replace(":Direccion:",inmueble.Direccion)
+                var htmlNew = self.$clasificadoTemp.html().replace(":Direccion:",inmueble.Direccion)
                                                         .replace(":Ciudad:",inmueble.Ciudad)
                                                         .replace(":Telefono:",inmueble.Telefono)
                                                         .replace(":Codigo_Postal:",inmueble.Codigo_Postal)
@@ -137,7 +131,9 @@ setSearch();
                                                         .replace(":Tipo:",inmueble.Tipo);
                   var $control = self.$clasificadoTemp.clone().html(htmlNew);
                   if(filter===undefined){
-                      $inmuebles.append( $control );
+                    $('.clasificado').hide()
+                  
+                    $inmuebles.append( $control );
                   }
                   else{
                     var show = (filter.Ciudad ===undefined || filter.Ciudad =="" || filter.Ciudad == inmueble.Ciudad);
